@@ -19,3 +19,15 @@ services:
   traefik:
     image: traefik
 
+  whoami:
+    image: emilevauge/whoami
+    networks:
+      - web
+    labels:
+      - "traefik.backend=whoami"
+      - "traefik.frontend.rule=Host:whoami.docker.localhost"
+
+networks:
+  web:
+    external:
+      name: traefik_webgateway
