@@ -41,6 +41,20 @@ services:
       - "traefik.weight=1"
       - "traefik.frontend.rule=PathPrefix:/avanti/"
 
+  avanti-canary:
+    image: 801351377084.dkr.ecr.us-west-1.amazonaws.com/avanti-container:r_master_df02ecbfed8d542e53834cf3ed059a1817299739
+    entrypoint: ["/home/avanti/bin/avanti-server"]
+    command: ["--port","8080","-v"]
+    ports:
+      - "8080"
+    volumes:
+      - "~/.aws:/home/avanti/.aws"
+    networks:
+      - web
+    labels:
+      - "traefik.backend=avanti-canary"
+      - "traefik.frontend.rule=Headers: Canary, True"
+
 networks:
   web:
     external:
