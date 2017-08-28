@@ -1,0 +1,10 @@
+version: '2'
+services:
+  traefik1:
+    image: 801351377084.dkr.ecr.us-west-1.amazonaws.com/traefik
+    command: --web --logLevel=DEBUG
+    ports:
+      - "80:80"
+      - "8080:8080"
+    labels:
+      avanti.service.count: "1"
