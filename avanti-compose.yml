@@ -1,8 +1,8 @@
 version: '2'
 services:
-  traefik1:
+  traefik2:
     image: 801351377084.dkr.ecr.us-west-1.amazonaws.com/traefik
-    command: --web --logLevel=DEBUG
+    command: --web --web.metrics.prometheus --web.metrics.prometheus.buckets="0.1,0.3,1.2,5.0" --logLevel=DEBUG
     ports:
       - "80:80"
       - "8080:8080"
